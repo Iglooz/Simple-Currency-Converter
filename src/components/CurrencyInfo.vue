@@ -1,5 +1,22 @@
 <template>
   <div>
+        <!--Displays the selected currency information or prompts the user to select one-->
+    <div class="container">
+      <div v-if="isCurSet">
+        <div class="row">
+          <div class="curInfo col-6">
+            <h3>{{ currentIndex.longName }}</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 curInfo">
+            <p>1 {{ currentIndex.shortName }} = {{ currentIndex.value }} isk</p>
+          </div>
+        </div>
+      </div>
+      <div v-if="!isCurSet" class="curInfo col-6">
+        <p>Ekkert valið</p>
+      </div>
     <div>
       <!--Shows the available currency options from the api -->
       <div>
@@ -16,23 +33,7 @@
         </ul>
       </div>
     </div>
-    <!--Displays the selected currency information or prompts the user to select one-->
-    <div class="container">
-      <div v-if="isCurSet">
-        <div class="row">
-          <div class="d-flex p-2 curInfo col-6">
-            <h3>{{ currentIndex.longName }}</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6 curInfo">
-            <p>1 {{ currentIndex.shortName }} = {{ currentIndex.value }} isk</p>
-          </div>
-        </div>
-      </div>
-      <div v-if="!isCurSet" class="d-flex p-2 curInfo col-6">
-        <p>Ekkert valið</p>
-      </div>
+
     </div>
   </div>
 </template>
@@ -52,7 +53,7 @@ export default {
       this.isCurSet = exRate;
       this.currentIndex = exRate;
       this.$emit("getConversionRate", exRate.value);
-      this.$emit("getCurrencyName", exRate.longName)
+      this.$emit("getCurrencyName", exRate.longName);
       console.log(exRate.value);
     },
   },
@@ -81,7 +82,7 @@ li {
   background-color: black;
   color: greenyellow;
   max-width: 30%;
-  margin: 1%;
+  margin-left: 10%;
 }
 .curOptions {
 }

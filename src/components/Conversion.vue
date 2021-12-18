@@ -4,7 +4,9 @@
     <div class="row">
       <div class="col-6">
         <div class="iskDisplay">
-          <h1 class="iskDisplay">{{calculateToIsk}} <span class="iskSmall">ISK</span> </h1>
+          <h1 class="iskDisplay">
+            {{ calculateToIsk }} <span class="iskSmall">ISK</span>
+          </h1>
         </div>
       </div>
     </div>
@@ -15,19 +17,15 @@
 export default {
   props: ["amount", "conversionRate"],
   data: () => {
-    return {
-      
-    };
+    return {};
   },
-  methods: {
-    
-  },
+  methods: {},
   watch: {
-     calculateToIsk: function(){
-      let sum = undefined
-      sum = this.calculateToIsk
-      this.$emit('calculatedSum', sum)
-    }
+    calculateToIsk: function () {
+      let sum = undefined;
+      sum = this.calculateToIsk;
+      this.$emit("calculatedSum", sum);
+    },
   },
   computed: {
     // Returns the computed result of the user input and exchange rate

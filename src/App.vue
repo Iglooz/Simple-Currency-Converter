@@ -1,23 +1,25 @@
 <template>
   <div id="app">
-      <!--Currency source selector-->
-      <header>
+    <!--Currency source selector-->
+    <header>
       <div class="currencySourceSelection">
-          <button @click="setSourceM5" class="btn btn-primary">M5</button>
-          <button @click="setSourceArion" class="btn btn-primary">Arion</button>
-          <span>
-            <p class="greenText">source: {{ exchangeSourceName }}</p>
-          </span>
+        <button @click="setSourceM5" class="btn btn-primary">M5</button>
+        <button @click="setSourceArion" class="btn btn-primary">Arion</button>
+        <span>
+          <p class="greenText">source: {{ exchangeSourceName }}</p>
+        </span>
       </div>
-      </header>
+    </header>
     <div class="container align-items-center">
-
-
       <!--Displays the calculated result-->
       <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-6 moneyArea d-flex p-2">
-          <Conversion :amount="inputValue" :conversionRate="exchangeRate" v-on:calculatedSum="getCalculatedSum($event)" />
+          <Conversion
+            :amount="inputValue"
+            :conversionRate="exchangeRate"
+            v-on:calculatedSum="getCalculatedSum($event)"
+          />
         </div>
         <div class="col-lg-3"></div>
       </div>
@@ -46,13 +48,14 @@
       <!--Displays a list of saved calculations-->
       <div class="row">
         <div class="col">
-        <History :objName="currentName" :objInput="inputValue" :objResult="calculatedSum" />
+          <History
+            :objName="currentName"
+            :objInput="inputValue"
+            :objResult="calculatedSum"
+          />
         </div>
       </div>
-
-
     </div>
-
   </div>
 </template>
 
@@ -78,7 +81,6 @@ export default {
       currentName: undefined,
       calculatedSum: 0,
       calculationObj: {},
-      
     };
   },
   methods: {
@@ -92,8 +94,6 @@ export default {
         })
         .catch((error) => console.log(error));
       this.exchangeSourceName = "M5";
-      console.log(this.setDataM5);
-      console.log(this.exchangeRateSource);
     },
     setSourceArion() {
       axios
@@ -104,29 +104,21 @@ export default {
         })
         .catch((error) => console.log(error));
       this.exchangeSourceName = "Arion";
-      console.log(this.setDataArion);
-      console.log(this.exchangeRateSource);
     },
     // Updates the exchange rate whenever a new currency is selected
     updateExchangeRate(value) {
       this.exchangeRate = value;
       console.log(value);
     },
-    getCurrentCurrencyName(name){
-      this.currentName = name
-      console.log(name)
-      console.log(this.inputValue)
-      console.log(this.calculatedSum)
+    // Gets the values required to send as a prop to the history component
+    getCurrentCurrencyName(name) {
+      this.currentName = name;
+      console.log(name);
     },
-    getCalculatedSum(value){
+    getCalculatedSum(value) {
       this.calculatedSum = value;
       console.log(value);
-
     },
-    createLogObj(){
-      let obj = {name: this.currentName, sum: this.calculatedSum}
-      this.calculationObj = obj
-    }
   },
   computed: {},
   mounted() {
@@ -153,7 +145,7 @@ export default {
   color: greenyellow;
 }
 .currencySourceSelection {
- margin-left: 2%;
+  margin-left: 2%;
 }
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap");
 </style>
